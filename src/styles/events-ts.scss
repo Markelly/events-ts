@@ -1,0 +1,65 @@
+$color-primary: #49c5b6;
+$color-primary-hover: #238e80;
+$color-secondary: #0e1574;
+$color-secondary-hover: #0c1151;
+$color-white: #fff;
+$color-light-green: #f4f7f6;
+$color-light-gray: #a6a6a6;
+$color-dark-gray: #747474;
+$color-light-red: #ffd3d3;
+$color-dark-red: #a90202;
+
+$card-image-height: 120px;
+$max-content-size: 948px;
+$breakpoint-tablet: 768px;
+
+h1 {
+  font-size: 48px;
+  font-weight: 600;
+  color: $color-secondary;
+  margin: 16px 0;
+}
+
+input {
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.btn-primary {
+  background: $color-primary;
+  border-color: $color-primary;
+
+  &:hover {
+    background: $color-primary-hover;
+  }
+}
+
+.btn-secondary {
+  background: $color-secondary;
+  border-color: $color-secondary;
+
+  &:hover {
+    background: $color-secondary-hover;
+    border-color: $color-secondary-hover;
+  }
+}
+
+.btn-text {
+  background: $color-light-green;
+  border-color: $color-light-green;
+  color: $color-primary;
+
+  &:hover {
+    background: $color-white;
+    border-color: $color-light-green;
+    color: $color-primary;
+  }
+}
+
+.form-control {
+  margin-bottom: 8px;
+}
+
+.form-link {
+  cursor: pointer;
+}

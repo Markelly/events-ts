@@ -12,7 +12,7 @@ export const SORT_OPTIONS = [
   { text: 'Upcoming events', value: 'date,asc', disabled: false },
   { text: 'Name', value: 'name,asc', disabled: false },
   { text: 'Relevance', value: 'relevance,asc', disabled: false },
-  { text: 'Distance', value: 'distance,asc', disabled: false },
+  { text: 'Distance', value: 'distance,asc', disabled: false }
 ];
 
 export const monthName: string[] = [
@@ -27,7 +27,7 @@ export const monthName: string[] = [
   'September',
   'October',
   'November',
-  'December',
+  'December'
 ];
 
 export const weekDayName: string[] = [
@@ -37,5 +37,5 @@ export const weekDayName: string[] = [
   'Wednesday',
   'Thursday',
   'Friday',
-  'Saturday',
+  'Saturday'
 ];

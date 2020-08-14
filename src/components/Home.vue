@@ -1,30 +1,38 @@
 <template>
   <div class='home'>
-    <h1>Hello from {{ city }}, {{ country }} </h1>
+    <h1>Events List</h1>
+      <Card
+          v-for="(item, index) in eventsList"
+          :key="index"
+          :event="item"
+          data-card
+      />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import events from '@/store/modules/events';
-import { Location } from '@/store/data-types';
+import Card from '@/components/Card.vue';
 
-@Component
+@Component({
+  components: {
+    Card
+  }
+})
 export default class Home extends Vue {
-  city: string = '';
-  country: string = '';
+  eventsList: Event[] = [];
 
-  async getCity() {
-    const location: Location = await events.getLocation();
-    this.city = location?.city;
-    this.country = location?.country;
+  async fetchEvents() {
+    this.eventsList = await events.getEvents(0);
   }
 
   mounted() {
-    this.getCity();
+    this.fetchEvents();
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/styles/events-ts.scss';
 </style>

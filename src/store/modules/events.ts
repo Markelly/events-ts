@@ -1,25 +1,42 @@
-import { Action, getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators';
+import {
+  Action,
+  getModule,
+  Module,
+  Mutation,
+  VuexModule
+} from 'vuex-module-decorators';
+import { Event } from '@/store/data-types';
 import store from '@/store';
+import DiscoveryApi from '@/api/DiscoveryApi';
 import IpApi from '@/api/IpApi';
 
 @Module({
-    namespaced: true,
-    name: 'events',
-    store,
-    dynamic: true,
+  namespaced: true,
+  name: 'Events',
+  store,
+  dynamic: true
 })
 class EventsModule extends VuexModule {
-    events: Event | null = null;
-    location: Location | null = null;
+  list: Event[] = [];
 
-    @Mutation
-    setLocation(location: Location) {
-        this.location = location;
-    }
-    @Action({commit: 'setLocation'})
-    async getLocation() {
-        return await IpApi.fetchLocation();
-    }
+  @Mutation
+  saveEvents(eventsList: Event[]) {
+    this.list = eventsList;
+  }
+
+  @Action
+  async getEvents(page: number, sort: string = 'date,asc') {
+    const location = await IpApi.fetchLocation();
+    const latLong = `${location.lat},${location.lon}`;
+    const data = await DiscoveryApi.fetchEvents(
+      page,
+      sort,
+      location.countryCode,
+      latLong
+    );
+    this.saveEvents(data._embedded.events);
+    return data._embedded.events;
+  }
 }
 
 export default getModule(EventsModule);
