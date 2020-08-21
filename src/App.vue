@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <Home/>
+    <EventsList/>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Home from '@/components/Home.vue';
+import EventsList from '@/views/EventsList.vue';
 
 @Component({
   components: {
-    Home,
+    EventsList,
   },
 })
 export default class App extends Vue {}
@@ -23,6 +23,8 @@ export default class App extends Vue {}
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  max-width: 1272px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 </style>
