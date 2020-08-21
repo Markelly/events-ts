@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <Home/>
+    <EventsList/>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Home from '@/components/Home.vue';
+import EventsList from '@/views/EventsList.vue';
 
 @Component({
   components: {
-    Home,
+    EventsList,
   },
 })
 export default class App extends Vue {}

@@ -6,6 +6,12 @@ export const getPrice = (item: EventResponse) => {
   return item.priceRanges ? `€${min} - €${max}` : 'Free';
 };
 
+export const getImageContext = (icon: string) => {
+  const images = require.context('../images', false, /\.png$/);
+  return images(`./${icon}.png`);
+};
+
 export default {
-  getPrice
+  getPrice,
+  getImageContext
 };

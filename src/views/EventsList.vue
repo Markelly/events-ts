@@ -14,21 +14,25 @@
 import { Component, Vue } from 'vue-property-decorator';
 import events from '@/store/modules/events';
 import Card from '@/components/Card.vue';
+import SortBy from "@/components/SortBy.vue";
 
 @Component({
   components: {
     Card
   }
 })
-export default class Home extends Vue {
+export default class EventsList extends Vue {
   eventsList: Event[] = [];
 
-  async fetchEvents() {
-    this.eventsList = await events.getEvents(0);
+  async fetchEvents(sort: string) {
+    this.eventsList = await events.getEvents(0, sort);
+  }
+  sortEvents(sort: string) {
+    this.fetchEvents(sort);
   }
 
   mounted() {
-    this.fetchEvents();
+    this.fetchEvents("");
   }
 }
 </script>
