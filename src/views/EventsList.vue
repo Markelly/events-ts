@@ -1,6 +1,7 @@
 <template>
   <div class='home'>
     <h1>Events List</h1>
+    <SortBy @sort="sortEvents"/>
       <Card
           v-for="(item, index) in eventsList"
           :key="index"
@@ -18,6 +19,7 @@ import SortBy from "@/components/SortBy.vue";
 
 @Component({
   components: {
+    SortBy,
     Card
   }
 })
@@ -25,7 +27,7 @@ export default class EventsList extends Vue {
   eventsList: Event[] = [];
 
   async fetchEvents(sort: string) {
-    this.eventsList = await events.getEvents(0, sort);
+    this.eventsList = await events.getEvents(sort);
   }
   sortEvents(sort: string) {
     this.fetchEvents(sort);

@@ -9,16 +9,17 @@
 </template>
 
 <script lang="ts">
-import { SORT_OPTIONS } from "@/utils/constants";
-import { Component, Vue } from "vue-property-decorator";
+import { SORT_OPTIONS } from '@/utils/constants';
+import { Component, Emit, Vue } from "vue-property-decorator";
 
 @Component
 export default class SortBy extends Vue {
   selected: string = "";
   options: object[] = SORT_OPTIONS;
 
+  @Emit()
   sort(selected: string) {
-    this.$emit("sort", selected);
+    this.selected = selected;
   }
 };
 </script>

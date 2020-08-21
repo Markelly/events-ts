@@ -8,6 +8,9 @@ export default {
     countryCode: string,
     latLong: string
   ) => {
+    if (sort === '' || sort === undefined) {
+      sort = 'date,asc';
+    }
     const response = await axios.get(
       `${DISCOVER_URL}/events.json?countryCode=${countryCode}&apikey=${API_KEY}&page=${page}&sort=${sort}&latlong=${latLong}`
     );

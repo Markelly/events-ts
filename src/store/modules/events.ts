@@ -25,11 +25,11 @@ class EventsModule extends VuexModule {
   }
 
   @Action
-  async getEvents(page: number, sort: string = 'date,asc') {
+  async getEvents(sort: string) {
     const location = await IpApi.fetchLocation();
     const latLong = `${location.lat},${location.lon}`;
     const data = await DiscoveryApi.fetchEvents(
-      page,
+      0,
       sort,
       location.countryCode,
       latLong
