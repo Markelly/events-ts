@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body class="overflow-hidden">
+  <b-card class="overflow-hidden">
     <b-row no-gutters class="card__row">
       <b-col md="4">
         <b-img :src="event.images[0].url" fluid-grow rounded />

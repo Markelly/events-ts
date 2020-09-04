@@ -1,6 +1,6 @@
 <template>
-  <div class='home'>
-    <h1>Events List</h1>
+  <div class='events-list'>
+    <h1>All events</h1>
     <SortBy @sort="sortEvents"/>
       <Card
           v-for="(item, index) in eventsList"
@@ -15,26 +15,29 @@
 import { Component, Vue } from 'vue-property-decorator';
 import events from '@/store/modules/events';
 import Card from '@/components/Card.vue';
-import SortBy from "@/components/SortBy.vue";
+import SortBy from '@/components/SortBy.vue';
+import { FAVORITES_PATH } from '@/utils/constants';
+import EventDate from "@/components/EventDate.vue";
 
 @Component({
   components: {
     SortBy,
-    Card
+    Card,
+    EventDate
   }
 })
 export default class EventsList extends Vue {
   eventsList: Event[] = [];
 
-  async fetchEvents(sort: string) {
+  async loadList(sort: string) {
     this.eventsList = await events.getEvents(sort);
   }
   sortEvents(sort: string) {
-    this.fetchEvents(sort);
+    this.loadList(sort);
   }
 
-  mounted() {
-    this.fetchEvents("");
+  created() {
+    this.loadList("");
   }
 }
 </script>
