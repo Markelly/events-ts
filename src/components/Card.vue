@@ -9,6 +9,7 @@
         <div class="card__name"> {{ event.name }}</div>
         <div class="card__price"> {{ price }}</div>
         <div class="card__icons">
+          <img :src="favoriteIcon" @click="addToFavorites" data-icon-favorite />
           <img :src="redirectIcon" @click="redirectToEventPage" data-icon-redirect />
         </div>
       </b-col>
@@ -21,6 +22,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { getImageContext, getPrice } from '@/utils/stringUtils';
 import { EventResponse } from '@/store/data-types';
 import Date from "@/components/EventDate.vue";
+import events from '@/store/modules/events';
 
 @Component({
   components: { Date }
@@ -29,13 +31,23 @@ export default class Card extends Vue {
   @Prop()
   event!: EventResponse;
 
+  isFavorite: boolean = this.event.favorite;
+
   get price(): string {
     return getPrice(this.event);
+  }
+  get favoriteIcon(): string {
+    const icon = this.isFavorite ? "heart-solid" : "heart-regular";
+    return getImageContext(icon);
   }
   get redirectIcon(): string {
     return getImageContext('external-link');
   }
 
+  addToFavorites(){
+    this.isFavorite = !this.isFavorite;
+    events.addToFavorites(this.event.id);
+  }
   redirectToEventPage() {
     window.open(this.event.url);
   }

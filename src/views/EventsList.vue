@@ -1,13 +1,16 @@
 <template>
   <div class='events-list'>
     <h1>All events</h1>
+    <b-button variant="secondary" data-favorites-button @click="gotoFavoritesPage">
+      My Favorites
+    </b-button>
     <SortBy @sort="sortEvents"/>
-      <Card
-          v-for="(item, index) in eventsList"
-          :key="index"
-          :event="item"
-          data-card
-      />
+    <Card
+        v-for="(item, index) in eventsList"
+        :key="index"
+        :event="item"
+        data-events-card
+    />
   </div>
 </template>
 
@@ -35,6 +38,9 @@ export default class EventsList extends Vue {
   sortEvents(sort: string) {
     this.loadList(sort);
   }
+  gotoFavoritesPage() {
+    this.$router.push(FAVORITES_PATH);
+  }
 
   created() {
     this.loadList("");
@@ -45,3 +51,4 @@ export default class EventsList extends Vue {
 <style scoped lang="scss">
 @import '@/styles/events-ts.scss';
 </style>
+

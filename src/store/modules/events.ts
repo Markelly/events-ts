@@ -18,10 +18,23 @@ import IpApi from '@/api/IpApi';
 })
 class EventsModule extends VuexModule {
   list: Event[] = [];
+  favorites: Event[] = [];
 
   @Mutation
   saveEvents(eventsList: Event[]) {
     this.list = eventsList;
+  }
+  @Mutation
+  addToFavorites(eventId: string) {
+    const event = this.list.find((item) => item.id === eventId);
+    if (event) {
+      event.favorite = !event.favorite;
+      event.favorite
+        ? this.favorites.unshift(event)
+        : (this.favorites = this.favorites.filter(
+            (item) => item.id !== event.id
+          ));
+    }
   }
 
   @Action
@@ -36,6 +49,10 @@ class EventsModule extends VuexModule {
     );
     this.saveEvents(data._embedded.events);
     return data._embedded.events;
+  }
+  @Action
+  getFavorites() {
+    return this.favorites;
   }
 }
 
