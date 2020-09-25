@@ -8,7 +8,7 @@ export const LOGIN_PATH: string = '/login';
 export const REGISTER_PATH: string = '/register';
 
 export const SORT_OPTIONS = [
-  { text: 'Sort by', value: null, disabled: true },
+  { text: 'Sort by', value: '', disabled: true },
   { text: 'Upcoming events', value: 'date,asc', disabled: false },
   { text: 'Name', value: 'name,asc', disabled: false },
   { text: 'Relevance', value: 'relevance,asc', disabled: false },

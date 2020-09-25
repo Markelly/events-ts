@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body class="overflow-hidden">
+  <b-card class="overflow-hidden">
     <b-row no-gutters class="card__row">
       <b-col md="4">
         <b-img :src="event.images[0].url" fluid-grow rounded />
@@ -9,6 +9,7 @@
         <div class="card__name"> {{ event.name }}</div>
         <div class="card__price"> {{ price }}</div>
         <div class="card__icons">
+          <img :src="favoriteIcon" @click="addToFavorites" data-icon-favorite />
           <img :src="redirectIcon" @click="redirectToEventPage" data-icon-redirect />
         </div>
       </b-col>
@@ -21,6 +22,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { getImageContext, getPrice } from '@/utils/stringUtils';
 import { EventResponse } from '@/store/data-types';
 import Date from "@/components/EventDate.vue";
+import events from '@/store/modules/events';
 
 @Component({
   components: { Date }
@@ -32,10 +34,17 @@ export default class Card extends Vue {
   get price(): string {
     return getPrice(this.event);
   }
+  get favoriteIcon(): string {
+    const icon = this.event.favorite ? "heart-solid" : "heart-regular";
+    return getImageContext(icon);
+  }
   get redirectIcon(): string {
     return getImageContext('external-link');
   }
 
+  addToFavorites(){
+    events.addToFavorites(this.event);
+  }
   redirectToEventPage() {
     window.open(this.event.url);
   }

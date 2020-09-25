@@ -1,19 +1,13 @@
 <template>
   <div id="app">
-    <EventsList/>
+    <router-view />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import EventsList from '@/views/EventsList.vue';
+import { Vue } from 'vue-property-decorator';
 
-@Component({
-  components: {
-    EventsList,
-  },
-})
-export default class App extends Vue {}
+export default class App extends Vue { }
 </script>
 
 <style>
