@@ -31,13 +31,11 @@ export default class Card extends Vue {
   @Prop()
   event!: EventResponse;
 
-  isFavorite: boolean = this.event.favorite;
-
   get price(): string {
     return getPrice(this.event);
   }
   get favoriteIcon(): string {
-    const icon = this.isFavorite ? "heart-solid" : "heart-regular";
+    const icon = this.event.favorite ? "heart-solid" : "heart-regular";
     return getImageContext(icon);
   }
   get redirectIcon(): string {
@@ -45,8 +43,7 @@ export default class Card extends Vue {
   }
 
   addToFavorites(){
-    this.isFavorite = !this.isFavorite;
-    events.addToFavorites(this.event.id);
+    events.addToFavorites(this.event);
   }
   redirectToEventPage() {
     window.open(this.event.url);

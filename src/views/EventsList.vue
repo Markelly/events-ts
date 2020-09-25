@@ -31,11 +31,14 @@ import EventDate from "@/components/EventDate.vue";
 })
 export default class EventsList extends Vue {
   eventsList: Event[] = [];
+  hasListChanged: boolean = false;
 
   async loadList(sort: string) {
-    this.eventsList = await events.getEvents(sort);
+    this.eventsList = await events.getEvents({ sort, hasListChanged: this.hasListChanged });
+    this.hasListChanged = false;
   }
   sortEvents(sort: string) {
+    this.hasListChanged = true;
     this.loadList(sort);
   }
   gotoFavoritesPage() {

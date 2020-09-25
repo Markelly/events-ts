@@ -25,8 +25,7 @@ class EventsModule extends VuexModule {
     this.list = eventsList;
   }
   @Mutation
-  addToFavorites(eventId: string) {
-    const event = this.list.find((item) => item.id === eventId);
+  addToFavorites(event: Event) {
     if (event) {
       event.favorite = !event.favorite;
       event.favorite
@@ -38,17 +37,22 @@ class EventsModule extends VuexModule {
   }
 
   @Action
-  async getEvents(sort: string) {
-    const location = await IpApi.fetchLocation();
-    const latLong = `${location.lat},${location.lon}`;
-    const data = await DiscoveryApi.fetchEvents(
-      0,
-      sort,
-      location.countryCode,
-      latLong
-    );
-    this.saveEvents(data._embedded.events);
-    return data._embedded.events;
+  async getEvents({ sort = '', hasListChanged = false }) {
+    let list = this.list;
+    if (!this.list.length || hasListChanged) {
+      const location = await IpApi.fetchLocation();
+      const latLong = `${location.lat},${location.lon}`;
+      const data = await DiscoveryApi.fetchEvents(
+        0,
+        sort,
+        location.countryCode,
+        latLong
+      );
+      list = data._embedded.events;
+      list.forEach((event) => (event.favorite = false));
+      this.saveEvents(list);
+    }
+    return list;
   }
   @Action
   getFavorites() {
