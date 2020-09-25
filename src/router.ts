@@ -1,8 +1,15 @@
 import EventsList from '@/views/EventsList.vue';
 import FavoritesList from '@/views/FavoritesList.vue';
+import Login from '@/views/Login.vue';
+import Register from '@/views/Register.vue';
 import VueRouter from 'vue-router';
 import Vue from 'vue';
-import { EVENTS_PATH, FAVORITES_PATH } from '@/utils/constants';
+import {
+  EVENTS_PATH,
+  FAVORITES_PATH,
+  LOGIN_PATH,
+  REGISTER_PATH
+} from '@/utils/constants';
 
 Vue.use(VueRouter);
 
@@ -18,12 +25,22 @@ const routes = [
     component: FavoritesList
   },
   {
+    path: REGISTER_PATH,
+    name: 'register',
+    component: Register
+  },
+  {
+    path: LOGIN_PATH,
+    name: 'login',
+    component: Login
+  },
+  {
     path: '/',
-    redirect: EVENTS_PATH
+    redirect: LOGIN_PATH
   },
   {
     path: '*',
-    redirect: EVENTS_PATH
+    redirect: LOGIN_PATH
   }
 ];
 
