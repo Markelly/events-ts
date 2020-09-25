@@ -68,3 +68,10 @@ export interface Page {
   totalElements: number;
   totalPages: number;
 }
+
+export interface User {
+  isAuthenticated: boolean;
+  isRegistered: boolean;
+  isConfirmed: boolean;
+  authError: string;
+}

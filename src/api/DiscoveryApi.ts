@@ -8,6 +8,7 @@ export default {
     countryCode: string,
     latLong: string
   ) => {
+    // TODO: try catch
     if (sort === '' || sort === undefined) {
       sort = 'date,asc';
     }
