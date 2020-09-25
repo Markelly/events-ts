@@ -56,10 +56,11 @@ input {
   }
 }
 
-.form-control {
-  margin-bottom: 8px;
+.form {
+  min-width: 320px;
 }
 
 .form-link {
+  margin-top: 8px;
   cursor: pointer;
 }
